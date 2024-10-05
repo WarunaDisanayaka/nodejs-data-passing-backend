@@ -1,14 +1,14 @@
 const express = require("express");
-const { SerialPort } = require("serialport"); // Import SerialPort correctly
-const { ReadlineParser } = require("@serialport/parser-readline");
+const SerialPort = require("serialport");
+const Readline = require("@serialport/parser-readline");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
 // Set up the serial port for Arduino connection (adjust COM port or /dev/ttyUSBx)
-const port = new SerialPort("/dev/ttyUSB0", { baudRate: 9600 }); // Replace with the correct port for your system
-const parser = new ReadlineParser();
+const port = new SerialPort("COM3", { baudRate: 9600 });
+const parser = new Readline();
 port.pipe(parser);
 
 let sensorData = {
